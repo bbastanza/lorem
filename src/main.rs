@@ -18,10 +18,14 @@ async fn fetch_lorem() -> Result<Vec<String>, Error> {
 async fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    let mut output_count: i32 = 50;
+    let mut output_count: i32 = 30;
 
     if args.len() == 2 {
-        output_count = args[1].parse().unwrap();
+        let result = args[1].parse();
+        match result {
+            Ok(count) => output_count = count,
+            _ => (),
+        }
     }
 
     let mut word_count: i32 = 0;
